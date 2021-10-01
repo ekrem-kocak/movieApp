@@ -10,6 +10,8 @@ import { CategoryService } from './category.service';
 export class CategoriesComponent implements OnInit {
 
   categories: Category[];
+  selectedCategoryId: string;
+  DisplayAll: boolean = true;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -17,6 +19,11 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.GetCategories().subscribe(ctgs => {
       this.categories = ctgs;
     })
+  }
+
+  SelectCategory(ctgId: string){
+    this.selectedCategoryId = ctgId;
+    this.DisplayAll = false;
   }
 
 

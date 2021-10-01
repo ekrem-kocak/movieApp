@@ -17,16 +17,40 @@ export class MovieService {
     return this.http.post<Movie>(this.url + 'movies.json', movie);
   }
 
-  GetMovies(): Observable<Movie[]> {
+  GetMovies(categoryId?: string, searchText?: string): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.url + 'movies.json').pipe(
       map(movies => {
-        let newMovies: Movie[] = [];
+        if (categoryId) {
+          let newMovies: Movie[] = [];
 
-        for (let key in movies) {
-          newMovies.push({ ...movies[key], id: key })
+          for (let key in movies) {
+            if (movies[key].categoryId == categoryId) {
+              newMovies.push({ ...movies[key], id: key })
+            }
+          }
+
+          return newMovies;
+        } else if (searchText) {
+
+          let newMovies: Movie[] = [];
+
+          for (let key in movies) {
+            if (movies[key].description.toLowerCase().includes(searchText.toLowerCase()) || movies[key].name.toLowerCase().includes(searchText.toLowerCase())) {
+              newMovies.push({ ...movies[key], id: key })
+            }
+          }
+
+          return newMovies;
+
+        } else {
+          let newMovies: Movie[] = [];
+
+          for (let key in movies) {
+            newMovies.push({ ...movies[key], id: key })
+          }
+
+          return newMovies;
         }
-
-        return newMovies;
       })
     )
   }

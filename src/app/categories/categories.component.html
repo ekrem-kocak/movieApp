@@ -1,8 +1,10 @@
 <div class="list-group">
-  <a routerLink="/movies/category/all" class="list-group-item list-group-item-action active">
+  <a routerLink="/movies" class="list-group-item list-group-item-action" [class.active]="DisplayAll" (click)="DisplayAll=true; selectedCategoryId=null;">
     All Categories
   </a>
 
-  <a *ngFor="let ctg of categories" routerLink="/movies/category/{{ctg.id}}" class="list-group-item list-group-item-action text-capitalize">{{ctg.name}}</a>
+  <a *ngFor="let ctg of categories" routerLink="/movies/category/{{ctg.id}}"
+    class="list-group-item list-group-item-action text-capitalize" (click)="SelectCategory(ctg.id)"
+    [class.active]="selectedCategoryId==ctg.id">{{ctg.name}}</a>
 
 </div>

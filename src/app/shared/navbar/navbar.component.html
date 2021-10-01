@@ -21,8 +21,8 @@
           </ul>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex" [formGroup]="searchForm" (ngSubmit)="Search()">
+        <input class="form-control me-2" type="search" placeholder="Search" formControlName="searchText">
         <button class="btn btn-outline-light" type="submit">Search</button>
       </form>
     </div>

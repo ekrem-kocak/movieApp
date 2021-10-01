@@ -30,6 +30,7 @@ import { MoviesComponent } from './movies.component';
           { path: 'create', component: MovieCreateComponent },
           { path: ':id', component: MoviesComponent },
           { path: 'category/:id', component: MoviesComponent },
+          { path: 'search/:text', component: MoviesComponent },
           { path: 'edit/:id', component: MoviesComponent },
         ]
       }

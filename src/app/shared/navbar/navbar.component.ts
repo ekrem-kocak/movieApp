@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 
+  searchForm = new FormGroup({
+    searchText: new FormControl('',[Validators.required])
+  })
+
+  Search(){
+    this.router.navigate([`/movies/search/${this.searchForm.value.searchText}`]);
+  }
 }
