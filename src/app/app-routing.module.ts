@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './auth/auth/auth.component';
-import { MoviesComponent } from './movies/movies/movies.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'movies', pathMatch: 'full' },

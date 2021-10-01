@@ -21,7 +21,19 @@ import { MoviesComponent } from './movies.component';
   ],
   imports: [
     CommonModule,
-
+    CategoriesModule,
+    ReactiveFormsModule,
+    RouterModule.forChild([
+      {
+        path: 'movies', component: MoviesHomeComponent, children: [
+          { path: '', component: MoviesComponent },
+          { path: 'create', component: MovieCreateComponent },
+          { path: ':id', component: MoviesComponent },
+          { path: 'category/:id', component: MoviesComponent },
+          { path: 'edit/:id', component: MoviesComponent },
+        ]
+      }
+    ])
   ],
   exports: [
     MoviesComponent,
