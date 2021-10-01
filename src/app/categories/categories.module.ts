@@ -12,6 +12,10 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    CategoriesComponent,
+    CategoryCreateComponent,
   ]
 })
 export class CategoriesModule { }
