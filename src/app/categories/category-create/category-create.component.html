@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <form>
+      <form [formGroup]="categoryCreateForm" (ngSubmit)="CreateCategory()" >
         <h4>Category Create</h4>
         <div class="my-3">
           <label class="form-label">Category Name</label>
-          <input type="email" class="form-control">
+          <input type="text" class="form-control" formControlName="name">
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button [disabled]="categoryCreateForm.invalid" type="submit" class="btn btn-primary">Create</button>
       </form>
     </div>
   </div>
