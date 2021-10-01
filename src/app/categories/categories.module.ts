@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryCreateComponent } from './category-create/category-create.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -11,7 +12,10 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
     CategoryCreateComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild([
+      { path: 'category/create', component: CategoryCreateComponent },
+    ])
   ],
   exports: [
     CategoriesComponent,
