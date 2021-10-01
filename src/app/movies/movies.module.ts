@@ -7,6 +7,7 @@ import { MovieComponent } from './movie/movie.component';
 import { CategoriesModule } from '../categories/categories.module';
 import { RouterModule } from '@angular/router';
 import { MoviesHomeComponent } from './movies-home/movies-home.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,6 +22,7 @@ import { MoviesHomeComponent } from './movies-home/movies-home.component';
   imports: [
     CommonModule,
     CategoriesModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: 'movies', component: MoviesHomeComponent, children: [

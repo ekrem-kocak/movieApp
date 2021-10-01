@@ -1,1 +1,3 @@
-<app-movie></app-movie>
+<div *ngFor="let movie of movies">
+  <app-movie [movie]="movie"></app-movie>
+</div>

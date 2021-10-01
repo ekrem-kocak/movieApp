@@ -1,27 +1,29 @@
 <div class="row">
   <div class="col-md-9">
-    <form>
+    <form [formGroup]="createMovieForm" (ngSubmit)="CreateMovie()">
       <h4>Movie Create</h4>
+
       <div class="my-3">
         <label class="form-label">Movie Name</label>
-        <input type="email" class="form-control">
+        <input type="text" class="form-control" formControlName="name">
       </div>
       <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea type="password" class="form-control" rows="5"></textarea>
+        <textarea type="text" class="form-control" rows="5" formControlName="description"></textarea>
       </div>
       <div class="my-3">
         <label class="form-label">Image Url</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="imageUrl">
       </div>
       <div class="my-3">
         <label class="form-label">Category</label>
-        <select class="form-select">
+        <select class="form-select" formControlName="categoryId">
           <option selected disabled>Seçiniz</option>
+          <option class="text-capitalize" *ngFor="let ctg of categories" [value]="ctg.id">{{ctg.name}}</option>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary">Create</button>
+      <button [disabled]="createMovieForm.invalid" type="submit" class="btn btn-primary">Create</button>
     </form>
 
   </div>
