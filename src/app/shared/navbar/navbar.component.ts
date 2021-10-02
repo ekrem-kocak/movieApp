@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user.subscribe(user=>{
       if(user){
-        console.log("calisti");
         this.isAuthenticated = true;
       }
     })
@@ -32,5 +31,11 @@ export class NavbarComponent implements OnInit {
 
   Search() {
     this.router.navigate([`/movies/search/${this.searchForm.value.searchText}`]);
+  }
+
+  Logout(){
+    this.isAuthenticated = false;
+    localStorage.removeItem('user');
+    this.router.navigate(["auth"]);
   }
 }

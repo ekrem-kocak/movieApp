@@ -12,14 +12,15 @@ export class AuthService {
 
   user = new BehaviorSubject<User>(null);
 
-  url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
+  SignUpUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
+  SignInUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
 
   constructor(
     private http: HttpClient
   ) { }
 
   Register(email: string, password: string): Observable<User> {
-    return this.http.post<User>(this.url + environment.ApiKey, {
+    return this.http.post<User>(this.SignUpUrl + environment.ApiKey, {
       email,
       password,
       returnSecureToken: true,
@@ -30,4 +31,28 @@ export class AuthService {
       })
     )
   }
+
+  Login(email: string, password: string): Observable<User> {
+    return this.http.post<User>(this.SignInUrl + environment.ApiKey, {
+      email,
+      password,
+      returnSecureToken: true,
+    }).pipe(
+      tap(user => {
+        let newUser = new User(user.idToken, user.email, user.refreshToken, user.expiresIn, user.localId);
+        this.user.next(newUser);
+      })
+    )
+  }
+
+  AutoLogin(){
+    const AutoLoginedUser = JSON.parse(localStorage.getItem('user'));
+
+    if(!AutoLoginedUser){
+      return;
+    }
+
+    this.user.next(AutoLoginedUser);
+  }
+
 }

@@ -28,9 +28,14 @@ export class AuthComponent implements OnInit {
 
   Auth() {
     if (this.LoginRegisterState) {
-      //login
+      this.authService.Login(this.authForm.value.email, this.authForm.value.password).subscribe(user => [
+        localStorage.setItem('user', JSON.stringify(user)),
+        this.router.navigate([""])
+      ], err => console.log(err))
+
     } else {
-      this.authService.Register(this.authForm.value.email, this.authForm.value.password).subscribe(res => {
+      this.authService.Register(this.authForm.value.email, this.authForm.value.password).subscribe(user => {
+        localStorage.setItem('user', JSON.stringify(user)),
         this.router.navigate([""]);
       }, err => console.log(err))
     }
