@@ -13,8 +13,8 @@
       </div>
       <div class="my-3">
         <label class="form-label">Image Url</label>
-        <div class="my-2">
-          <img *ngIf="createMovieForm.value.imageUrl.valid" src="../../../assets/img/{{movieImage}}" class="img-fluid rounded" style="max-height: 250px;">
+        <div *ngIf="createMovieForm.get('imageUrl').dirty && createMovieForm.get('imageUrl').valid" class="my-2">
+          <img src="../../../assets/img/{{movieImage}}" class="img-fluid rounded" style="max-height: 250px;">
         </div>
         <input [(ngModel)]="movieImage" type="text" class="form-control" formControlName="imageUrl" placeholder="*">
         <ul *ngIf="createMovieForm.get('imageUrl').invalid" class="alert alert-danger ps-4 py-1">

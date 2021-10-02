@@ -27,4 +27,17 @@ export class MovieDetailComponent implements OnInit {
     })
   }
 
+  AddToList(e: any, movie: Movie) {
+    if(e.target.classList.contains('btn-success')){
+      e.target.classList.replace('btn-success','btn-danger');
+      e.target.innerText = "Listeden Kaldır";
+
+      // this.movieService.AddToList(movie);
+    }else{
+      e.target.classList.replace('btn-danger','btn-success');
+      e.target.innerText = "Listeye Ekle";
+      // this.movieService.RemoveFromList(movie);
+    }
+  }
+
 }
