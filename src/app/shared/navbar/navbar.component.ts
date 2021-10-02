@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +10,27 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  isAuthenticated: boolean = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.authService.user.subscribe(user=>{
+      if(user){
+        console.log("calisti");
+        this.isAuthenticated = true;
+      }
+    })
   }
 
   searchForm = new FormGroup({
-    searchText: new FormControl('',[Validators.required])
+    searchText: new FormControl('', [Validators.required])
   })
 
-  Search(){
+  Search() {
     this.router.navigate([`/movies/search/${this.searchForm.value.searchText}`]);
   }
 }

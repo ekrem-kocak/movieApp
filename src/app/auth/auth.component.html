@@ -1,1 +1,29 @@
-<p>auth works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <form [formGroup]="authForm" (ngSubmit)="Auth()">
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-control" formControlName="email">
+          <div *ngIf="authForm.get('email').invalid && authForm.get('email').dirty" class="alert alert-danger">
+            <ul class="mb-0">
+              <li>Registration and Login is made only by university e-mail.
+                <br>
+                e.g ( _____@ogr._____.edu.tr )</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password">
+        </div>
+        <div>
+          <button [disabled]="authForm.invalid" type="submit"
+            class="btn btn-primary">{{LoginRegisterState?'Login':'Register'}}</button>
+          <button type="button" (click)="LoginRegisterState=!LoginRegisterState" class="btn btn-warning ms-3">Toggle to
+            {{LoginRegisterState?'Register':'Login'}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,15 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
   <div class="container py-1">
-    <a class="navbar-brand" routerLink="/" >Navbar</a>
+    <a class="navbar-brand" routerLink="/">Navbar</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navItems">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navItems">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto" *ngIf="isAuthenticated">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/movies">Movies</a>
+          <a routerLink="" class="nav-link active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/movies" class="nav-link">Movies</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
@@ -21,10 +24,20 @@
           </ul>
         </li>
       </ul>
-      <form class="d-flex" [formGroup]="searchForm" (ngSubmit)="Search()">
-        <input class="form-control me-2" type="search" placeholder="Search" formControlName="searchText">
-        <button class="btn btn-outline-light" type="submit">Search</button>
-      </form>
+
+      <ul class="navbar-nav ms-auto">
+        <form *ngIf="isAuthenticated" class="d-flex me-5" [formGroup]="searchForm" (ngSubmit)="Search()">
+          <input class="form-control me-2" type="search" placeholder="Search" formControlName="searchText">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+        <li class="nav-item">
+          <a *ngIf="!isAuthenticated" routerLink="/auth" class="nav-link">Login</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="isAuthenticated" class="nav-link" style="cursor: pointer;">Logout</a>
+        </li>
+      </ul>
+
     </div>
   </div>
 </nav>
