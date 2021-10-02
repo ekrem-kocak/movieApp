@@ -23,7 +23,10 @@
         </select>
       </div>
 
-      <button [disabled]="editMovieForm.invalid" type="submit" class="btn btn-warning">Edit</button>
+      <div>
+        <button [disabled]="editMovieForm.invalid" type="submit" class="btn btn-warning">Edit</button>
+        <button (click)="DeleteMovie()" type="button" class="btn btn-danger ms-2">Delete</button>
+      </div>
     </form>
 
   </div>

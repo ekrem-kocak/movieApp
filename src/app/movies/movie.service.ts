@@ -75,4 +75,8 @@ export class MovieService {
   EditMovie(movie: Movie): Observable<Movie> {
     return this.http.put<Movie>(this.url + 'movies/' + movie.id + '.json', movie);
   }
+
+  DeleteMovie(movie: Movie): Observable<Movie>{
+    return this.http.delete<Movie>(this.url + 'movies/' + movie.id + '.json');
+  }
 }

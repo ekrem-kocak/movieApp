@@ -66,4 +66,10 @@ export class MovieEditComponent implements OnInit {
     })
   }
 
+  DeleteMovie() {
+    this.movieService.DeleteMovie(this.editingMovie).subscribe(() => {
+      this.router.navigate(["/movies"]);
+    })
+  }
+
 }
