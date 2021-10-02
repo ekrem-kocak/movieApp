@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MoviesComponent } from './movies.component';
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { MyListComponent } from './my-list/my-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -20,23 +22,26 @@ import { AuthGuard } from '../auth/auth.guard';
     MovieCreateComponent,
     MovieComponent,
     MoviesHomeComponent,
-    MovieEditComponent
+    MovieEditComponent,
+    MyListComponent
   ],
   imports: [
     CommonModule,
     CategoriesModule,
     ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild([
+      { path: 'movies/mylist', component: MyListComponent, canActivate: [AuthGuard] },
+      { path: 'movies/create', component: MovieCreateComponent, canActivate: [AuthGuard] },
       {
-        path: 'movies', component: MoviesHomeComponent, canActivate:[AuthGuard], children: [
+        path: 'movies', component: MoviesHomeComponent, canActivate: [AuthGuard], children: [
           { path: '', component: MoviesComponent },
-          { path: 'create', component: MovieCreateComponent },
           { path: ':id', component: MovieDetailComponent },
           { path: 'category/:id', component: MoviesComponent },
           { path: 'search/:text', component: MoviesComponent },
-          { path: 'edit/:id', component:  MovieEditComponent},
+          { path: 'edit/:id', component: MovieEditComponent },
         ]
-      }
+      },
     ])
   ],
   exports: [

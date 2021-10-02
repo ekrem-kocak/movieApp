@@ -10,7 +10,8 @@ import { MovieService } from '../movie.service';
 })
 export class MovieDetailComponent implements OnInit {
 
-  selectedMovie: Movie;
+  selectedMovie: Movie = { name: '', description: '', imageUrl: '', categoryId: '' };
+  myList: string[] = [];
 
   constructor(
     private movieService: MovieService,
@@ -25,19 +26,27 @@ export class MovieDetailComponent implements OnInit {
         })
       }
     })
+
+    this.movieService.GetMyList().subscribe(myList => {
+      this.myList = myList;
+    })
   }
 
-  AddToList(e: any, movie: Movie) {
-    if(e.target.classList.contains('btn-success')){
-      e.target.classList.replace('btn-success','btn-danger');
+  AddRemove(e: any, movie: Movie) {
+    if (e.target.classList.contains('btn-success')) {
+      e.target.classList.replace('btn-success', 'btn-danger');
       e.target.innerText = "Listeden Kaldır";
 
-      // this.movieService.AddToList(movie);
-    }else{
-      e.target.classList.replace('btn-danger','btn-success');
+      this.movieService.AddToList(movie).subscribe();
+    } else {
+      e.target.classList.replace('btn-danger', 'btn-success');
       e.target.innerText = "Listeye Ekle";
-      // this.movieService.RemoveFromList(movie);
+      this.movieService.RemoveFromList(movie).subscribe();
     }
+  }
+
+  ButtonState(): boolean {
+    return this.myList.includes(this.selectedMovie.id) ? true : false;
   }
 
 }

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { exhaustMap, map, take } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 import { Movie } from './movie.model';
 
 @Injectable({
@@ -11,7 +12,10 @@ export class MovieService {
 
   url = "https://movieapp-b1366-default-rtdb.firebaseio.com/";
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
 
   CreateMovie(movie: Movie): Observable<Movie> {
     return this.http.post<Movie>(this.url + 'movies.json', movie);
@@ -76,7 +80,42 @@ export class MovieService {
     return this.http.put<Movie>(this.url + 'movies/' + movie.id + '.json', movie);
   }
 
-  DeleteMovie(movie: Movie): Observable<Movie>{
+  DeleteMovie(movie: Movie): Observable<Movie> {
     return this.http.delete<Movie>(this.url + 'movies/' + movie.id + '.json');
+  }
+
+  AddToList(movie: Movie): Observable<Movie> {
+    return this.authService.user.pipe(
+      take(1),
+      exhaustMap(user => {
+        return this.http.post<Movie>(this.url + 'users/' + user.localId + '/myList/' + movie.id + '.json', { addedTime: new Date().getTime() });
+      })
+    )
+  }
+
+  RemoveFromList(movie: Movie): Observable<Movie> {
+    return this.authService.user.pipe(
+      take(1),
+      exhaustMap(user => {
+        return this.http.delete<Movie>(this.url + 'users/' + user.localId + '/myList/' + movie.id + '.json');
+      })
+    )
+  }
+
+  GetMyList(): Observable<string[]> {
+    return this.authService.user.pipe(
+      take(1),
+      exhaustMap(user => {
+        return this.http.get(this.url + 'users/' + user.localId + '/myList.json').pipe(
+          map(movies=>{
+            let myList: string[] = [];
+            for(let movieId in movies){
+              myList.push(movieId);
+            }
+            return myList;
+          })
+        )
+      })
+    )
   }
 }

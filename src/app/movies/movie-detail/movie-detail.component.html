@@ -9,7 +9,8 @@
         <p class="card-text">
           {{selectedMovie.description}}
         </p>
-        <button type="button" (click)="AddToList($event,selectedMovie)" class="btn btn-success">Listeye Ekle</button>
+        <button *ngIf="!ButtonState()" type="button" (click)="AddRemove($event,selectedMovie)" class="btn btn-success">Listeye Ekle</button>
+        <button *ngIf="ButtonState()" type="button" (click)="AddRemove($event,selectedMovie)" class="btn btn-danger">Listeden Kaldır</button>
       </div>
 
     </div>

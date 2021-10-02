@@ -1,11 +1,15 @@
-<div *ngIf="!loading; else loadingTemplate">
-  <div *ngFor="let movie of movies">
-    <app-movie [movie]="movie"></app-movie>
+<div *ngIf="movies.length > 0">
+  <div *ngIf="!loading; else loadingTemplate">
+    <div *ngFor="let movie of movies">
+      <app-movie [movie]="movie" [myMovieList]="myList"></app-movie>
+    </div>
   </div>
 </div>
 
+<div *ngIf="movies.length == 0">
+  <app-no-movies></app-no-movies>
+</div>
+
 <ng-template #loadingTemplate>
-  <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
+  <app-loading></app-loading>
 </ng-template>

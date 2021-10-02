@@ -17,18 +17,23 @@ export class MovieComponent implements OnInit {
   }
 
   @Input() movie: Movie;
+  @Input() myMovieList: string[];
 
-  AddToList(e: any, movie: Movie) {
-    if(e.target.classList.contains('btn-success')){
-      e.target.classList.replace('btn-success','btn-danger');
+  AddRemove(e: any, movie: Movie) {
+    if (e.target.classList.contains('btn-success')) {
+      e.target.classList.replace('btn-success', 'btn-danger');
       e.target.innerText = "Listeden Kaldır";
 
-      // this.movieService.AddToList(movie);
-    }else{
-      e.target.classList.replace('btn-danger','btn-success');
+      this.movieService.AddToList(movie).subscribe(() => { }, err => console.log(err))
+    } else {
+      e.target.classList.replace('btn-danger', 'btn-success');
       e.target.innerText = "Listeye Ekle";
-      // this.movieService.RemoveFromList(movie);
+      this.movieService.RemoveFromList(movie).subscribe();
     }
+  }
+
+  ButtonState(): boolean {
+    return this.myMovieList.includes(this.movie.id) ? true : false;
   }
 
 }

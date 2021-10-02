@@ -1,38 +1,41 @@
-<div class="row">
-  <div class="col-md-9">
-    <form [formGroup]="createMovieForm" (ngSubmit)="CreateMovie()">
-      <h4>Movie Create</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <form [formGroup]="createMovieForm" (ngSubmit)="CreateMovie()">
+        <h4>Movie Create</h4>
 
-      <div class="my-3">
-        <label class="form-label">Movie Name</label>
-        <input type="text" class="form-control" formControlName="name">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea type="text" class="form-control" rows="5" formControlName="description"></textarea>
-      </div>
-      <div class="my-3">
-        <label class="form-label">Image Url</label>
-        <div *ngIf="createMovieForm.get('imageUrl').dirty && createMovieForm.get('imageUrl').valid" class="my-2">
-          <img src="../../../assets/img/{{movieImage}}" class="img-fluid rounded" style="max-height: 250px;">
+        <div class="my-3">
+          <label class="form-label">Movie Name</label>
+          <input type="text" class="form-control" formControlName="name">
         </div>
-        <input [(ngModel)]="movieImage" type="text" class="form-control" formControlName="imageUrl" placeholder="*">
-        <ul *ngIf="createMovieForm.get('imageUrl').invalid" class="alert alert-danger ps-4 py-1">
-          <li class="text-danger">
-            uzantı '.jpg' olmak zorundadır.
-          </li>
-        </ul>
-      </div>
-      <div class="my-3">
-        <label class="form-label">Category</label>
-        <select class="form-select" formControlName="categoryId">
-          <option selected disabled>Seçiniz</option>
-          <option class="text-capitalize" *ngFor="let ctg of categories" [value]="ctg.id">{{ctg.name}}</option>
-        </select>
-      </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea type="text" class="form-control" rows="5" formControlName="description"></textarea>
+        </div>
+        <div class="my-3">
+          <label class="form-label">Image Url</label>
+          <div *ngIf="createMovieForm.get('imageUrl').dirty && createMovieForm.get('imageUrl').valid" class="my-2">
+            <img src="../../../assets/img/{{movieImage}}" class="img-fluid rounded" style="max-height: 250px;">
+          </div>
+          <input [(ngModel)]="movieImage" type="text" class="form-control" formControlName="imageUrl" placeholder="*">
+          <ul *ngIf="createMovieForm.get('imageUrl').invalid" class="alert alert-danger ps-4 py-1">
+            <li class="text-danger">
+              uzantı '.jpg' olmak zorundadır.
+            </li>
+          </ul>
+        </div>
+        <div class="my-3">
+          <label class="form-label">Category</label>
+          <select class="form-select" formControlName="categoryId">
+            <option selected disabled>Seçiniz</option>
+            <option class="text-capitalize" *ngFor="let ctg of categories" [value]="ctg.id">{{ctg.name}}</option>
+          </select>
+        </div>
 
-      <button [disabled]="createMovieForm.invalid" type="submit" class="btn btn-primary">Create</button>
-    </form>
+        <button [disabled]="createMovieForm.invalid" type="submit" class="btn btn-primary">Create</button>
+      </form>
 
+    </div>
   </div>
+
 </div>

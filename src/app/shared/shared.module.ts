@@ -4,13 +4,17 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoMoviesComponent } from './no-movies/no-movies.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    NoMoviesComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -18,9 +22,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule
   ],
-  exports:[
+  exports: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    NoMoviesComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }

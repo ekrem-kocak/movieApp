@@ -13,6 +13,8 @@ export class MoviesComponent implements OnInit {
   movies: Movie[];
   loading: boolean = false;;
 
+  myList: string[] = [];
+
   constructor(
     private movieService: MovieService,
     private activatedRoute: ActivatedRoute
@@ -22,7 +24,7 @@ export class MoviesComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.loading = true;
       if (params) {
-        this.movieService.GetMovies(params.id,params.text).subscribe(movies => {
+        this.movieService.GetMovies(params.id, params.text).subscribe(movies => {
           this.movies = movies;
           this.loading = false;
         })
@@ -33,6 +35,10 @@ export class MoviesComponent implements OnInit {
         })
       }
     })
+
+    this.movieService.GetMyList().subscribe(myListItems => {
+      this.myList = myListItems;
+    }, err => console.log(err))
   }
 
 

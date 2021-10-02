@@ -12,7 +12,8 @@
 
         <div>
           <button routerLink="/movies/{{movie.id}}" class="btn btn-primary me-2">Detail</button>
-          <button type="button" (click)="AddToList($event,movie)" class="btn btn-success">Listeye Ekle</button>
+          <button *ngIf="!ButtonState()" type="button" (click)="AddRemove($event,movie)" class="btn btn-success">Listeye Ekle</button>
+          <button *ngIf="ButtonState()" type="button" (click)="AddRemove($event,movie)" class="btn btn-danger">Listeden Kaldır</button>
         </div>
       </div>
 
