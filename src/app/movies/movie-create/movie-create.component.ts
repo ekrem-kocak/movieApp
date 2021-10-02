@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/categories/category.model';
 import { CategoryService } from 'src/app/categories/category.service';
+import { ImageUrlValidators } from '../imageUrlExtension.validators';
 import { MovieService } from '../movie.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { MovieService } from '../movie.service';
 export class MovieCreateComponent implements OnInit {
 
   categories: Category[];
+  movieImage: string;
 
   constructor(
     private categoryService: CategoryService,
@@ -29,7 +31,7 @@ export class MovieCreateComponent implements OnInit {
   createMovieForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     description: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    imageUrl: new FormControl('', [Validators.required]),
+    imageUrl: new FormControl('', [Validators.required, ImageUrlValidators]),
     categoryId: new FormControl('', [Validators.required]),
   })
 
@@ -39,7 +41,7 @@ export class MovieCreateComponent implements OnInit {
       description: this.createMovieForm.value.description,
       imageUrl: this.createMovieForm.value.imageUrl,
       categoryId: this.createMovieForm.value.categoryId
-    }).subscribe(()=>{
+    }).subscribe(() => {
       this.router.navigate(["movies"]);
     })
   }

@@ -5,15 +5,23 @@
 
       <div class="my-3">
         <label class="form-label">Movie Name</label>
-        <input type="text" class="form-control" formControlName="name">
+        <input type="text" class="form-control" formControlName="name" placeholder="*">
       </div>
       <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea type="text" class="form-control" rows="5" formControlName="description"></textarea>
+        <textarea type="text" class="form-control" rows="5" formControlName="description" placeholder="*"></textarea>
       </div>
       <div class="my-3">
         <label class="form-label">Image Url</label>
-        <input type="text" class="form-control" formControlName="imageUrl">
+        <div class="my-2">
+          <img *ngIf="editMovieForm.get('imageUrl').valid" src="../../../assets/img/{{movieImage}}" class="img-fluid rounded" style="max-height: 250px;">
+        </div>
+        <input [(ngModel)]="movieImage" type="text" class="form-control" formControlName="imageUrl" placeholder="*">
+        <ul *ngIf="editMovieForm.get('imageUrl').invalid" class="alert alert-danger ps-4 py-1">
+          <li class="text-danger">
+            uzantı '.jpg' olmak zorundadır.
+          </li>
+        </ul>
       </div>
       <div class="my-3">
         <label class="form-label">Category</label>

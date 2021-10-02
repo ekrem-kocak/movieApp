@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/categories/category.model';
 import { CategoryService } from 'src/app/categories/category.service';
+import { ImageUrlValidators } from '../imageUrlExtension.validators';
 import { Movie } from '../movie.model';
 import { MovieService } from '../movie.service';
 
@@ -15,6 +16,8 @@ export class MovieEditComponent implements OnInit {
 
   editingMovie: Movie;
   categories: Category[];
+
+  movieImage: string;
 
   editMovieForm = new FormGroup({
     name: new FormControl(''),
@@ -44,9 +47,11 @@ export class MovieEditComponent implements OnInit {
           this.editMovieForm = new FormGroup({
             name: new FormControl(movie.name, [Validators.required, Validators.minLength(5)]),
             description: new FormControl(movie.description, [Validators.required, Validators.minLength(10)]),
-            imageUrl: new FormControl(movie.imageUrl, [Validators.required]),
+            imageUrl: new FormControl(movie.imageUrl, [Validators.required, ImageUrlValidators]),
             categoryId: new FormControl(movie.categoryId, [Validators.required]),
           })
+
+          this.movieImage = movie.imageUrl;
         })
       }
     })
