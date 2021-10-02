@@ -54,4 +54,8 @@ export class MovieService {
       })
     )
   }
+
+  GetMovieById(movieId: string):Observable<Movie>{
+    return this.http.get<Movie>(this.url + 'movies/' + movieId + '.json');
+  }
 }

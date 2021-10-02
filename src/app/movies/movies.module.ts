@@ -28,7 +28,7 @@ import { MoviesComponent } from './movies.component';
         path: 'movies', component: MoviesHomeComponent, children: [
           { path: '', component: MoviesComponent },
           { path: 'create', component: MovieCreateComponent },
-          { path: ':id', component: MoviesComponent },
+          { path: ':id', component: MovieDetailComponent },
           { path: 'category/:id', component: MoviesComponent },
           { path: 'search/:text', component: MoviesComponent },
           { path: 'edit/:id', component: MoviesComponent },
