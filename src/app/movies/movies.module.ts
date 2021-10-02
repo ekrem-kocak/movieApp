@@ -9,6 +9,7 @@ import { MoviesHomeComponent } from './movies-home/movies-home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MoviesComponent } from './movies.component';
 import { MovieEditComponent } from './movie-edit/movie-edit.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 
 
@@ -27,7 +28,7 @@ import { MovieEditComponent } from './movie-edit/movie-edit.component';
     ReactiveFormsModule,
     RouterModule.forChild([
       {
-        path: 'movies', component: MoviesHomeComponent, children: [
+        path: 'movies', component: MoviesHomeComponent, canActivate:[AuthGuard], children: [
           { path: '', component: MoviesComponent },
           { path: 'create', component: MovieCreateComponent },
           { path: ':id', component: MovieDetailComponent },

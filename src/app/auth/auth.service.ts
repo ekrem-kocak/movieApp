@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -16,7 +17,8 @@ export class AuthService {
   SignInUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   Register(email: string, password: string): Observable<User> {
@@ -45,10 +47,11 @@ export class AuthService {
     )
   }
 
-  AutoLogin(){
+  AutoLogin() {
     const AutoLoginedUser = JSON.parse(localStorage.getItem('user'));
 
-    if(!AutoLoginedUser){
+    if (!AutoLoginedUser) {
+      this.router.navigate(["auth"]);
       return;
     }
 
