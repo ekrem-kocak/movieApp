@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { MoviesHomeComponent } from './movies-home/movies-home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MoviesComponent } from './movies.component';
+import { MovieEditComponent } from './movie-edit/movie-edit.component';
 
 
 
@@ -17,7 +18,8 @@ import { MoviesComponent } from './movies.component';
     MovieDetailComponent,
     MovieCreateComponent,
     MovieComponent,
-    MoviesHomeComponent
+    MoviesHomeComponent,
+    MovieEditComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,7 @@ import { MoviesComponent } from './movies.component';
           { path: ':id', component: MovieDetailComponent },
           { path: 'category/:id', component: MoviesComponent },
           { path: 'search/:text', component: MoviesComponent },
-          { path: 'edit/:id', component: MoviesComponent },
+          { path: 'edit/:id', component:  MovieEditComponent},
         ]
       }
     ])
@@ -41,6 +43,7 @@ import { MoviesComponent } from './movies.component';
     MovieDetailComponent,
     MovieCreateComponent,
     MovieComponent,
+    MovieEditComponent,
   ]
 })
 export class MoviesModule { }

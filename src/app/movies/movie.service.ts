@@ -55,7 +55,24 @@ export class MovieService {
     )
   }
 
-  GetMovieById(movieId: string):Observable<Movie>{
-    return this.http.get<Movie>(this.url + 'movies/' + movieId + '.json');
+  GetMovieById(movieId: string): Observable<Movie> {
+    return this.http.get<Movie>(this.url + 'movies/' + movieId + '.json').pipe(
+      // id eklemek icin yapiliyor map islemi
+      map(movie => {
+        let mv: Movie = {
+          id: movieId,
+          name: movie.name,
+          description: movie.description,
+          imageUrl: movie.imageUrl,
+          categoryId: movie.categoryId
+        }
+
+        return mv;
+      })
+    )
+  }
+
+  EditMovie(movie: Movie): Observable<Movie> {
+    return this.http.put<Movie>(this.url + 'movies/' + movie.id + '.json', movie);
   }
 }
