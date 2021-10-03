@@ -7,15 +7,40 @@
           <input type="email" class="form-control" formControlName="email">
           <div *ngIf="authForm.get('email').invalid && authForm.get('email').dirty" class="alert alert-danger">
             <ul class="mb-0">
-              <li>Registration and Login is made only by university e-mail.
+              <li>Yalnızca öğrenci email adresi ile giriş/kayıt yapılabilir.
+                <br><br class="d-md-none">
+                (Login/Registration is only student mail)
+                <br><br class="d-md-none">
+                e.g ( _____@ogr._____.edu.tr )
                 <br>
-                e.g ( _____@ogr._____.edu.tr )</li>
+              </li>
             </ul>
+          </div>
+          <div class="form-text">
+            Deneme modunda olduğu için kurallara uygun herhangi bir email uydurup kayıt
+              olabilirsiniz. Email onayı şuan için istenmiyor. <br>
+              (Trial version. No email confirmation. You can create an e-mail in accordance with the rules and register.)
           </div>
         </div>
         <div class="mb-3">
           <label class="form-label">Password</label>
           <input type="password" class="form-control" formControlName="password">
+          <div *ngIf="authForm.get('password').invalid && authForm.get('password').dirty" class="alert alert-danger">
+            <ul class="m-0">
+              <li>
+                Şifreniz en az 5 karakter uzunluğunda olmalıdır.
+              </li>
+              <li>
+                Büyük harf, küçük harf ve en az bir sayısal ifade içermelidir.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage.length > 0" class="alert alert-danger">
+          <ul class="m-0">
+            <li *ngFor="let err of errorMessage">{{err}}</li>
+          </ul>
         </div>
         <div>
           <button [disabled]="authForm.invalid" type="submit"

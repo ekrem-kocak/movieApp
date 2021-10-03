@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { exhaustMap, map, take } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
+import { CategoryService } from '../categories/category.service';
 import { Movie } from './movie.model';
 
 @Injectable({
@@ -14,7 +15,8 @@ export class MovieService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private categoryService: CategoryService
   ) { }
 
   CreateMovie(movie: Movie): Observable<Movie> {
@@ -68,7 +70,8 @@ export class MovieService {
           name: movie.name,
           description: movie.description,
           imageUrl: movie.imageUrl,
-          categoryId: movie.categoryId
+          categoryId: movie.categoryId,
+          categoryName: movie.categoryName
         }
 
         return mv;

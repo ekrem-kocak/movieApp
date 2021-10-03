@@ -1,12 +1,12 @@
-<div *ngIf="movies.length > 0">
-  <div *ngIf="!loading; else loadingTemplate">
+<div *ngIf="!loading; else loadingTemplate">
+  <div *ngIf="movies.length > 0">
     <div *ngFor="let movie of movies">
       <app-movie [movie]="movie" [myMovieList]="myList"></app-movie>
     </div>
   </div>
 </div>
 
-<div *ngIf="movies.length == 0">
+<div *ngIf="movies.length == 0 && !loading">
   <app-no-movies></app-no-movies>
 </div>
 

@@ -1,20 +1,28 @@
 <div class="card mb-3">
   <div class="row">
-    <div class="col-md-3 ">
+    <div class="col-lg-3 col-md-5 text-md-start text-center">
       <img src="../../../assets/img/{{movie.imageUrl}}" class="img-fluid rounded-start">
     </div>
-    <div class="col-md-9 d-flex flex-column justify-content-between">
-      <div class="card-body">
+    <div class="card-body ol-lg-9 col-md-7 d-flex flex-column justify-content-between">
+      <div>
         <h5 class="card-title text-capitalize">{{movie.name}}</h5>
         <p class="card-text">
           {{movie.description}}
         </p>
+      </div>
 
-        <div>
-          <button routerLink="/movies/{{movie.id}}" class="btn btn-primary me-2">Detail</button>
-          <button *ngIf="!ButtonState()" type="button" (click)="AddRemove($event,movie)" class="btn btn-success">Listeye Ekle</button>
-          <button *ngIf="ButtonState()" type="button" (click)="AddRemove($event,movie)" class="btn btn-danger">Listeden Kaldır</button>
-        </div>
+      <div>
+        <span class="badge bg-dark p-2 text-capitalize">
+          {{movie.categoryName}}
+        </span>
+      </div>
+
+      <div>
+        <button routerLink="/movies/{{movie.id}}" class="btn btn-primary me-2">Detail</button>
+        <button *ngIf="!ButtonState()" type="button" (click)="AddRemove($event,movie)" class="btn btn-success">Listeye
+          Ekle</button>
+        <button *ngIf="ButtonState()" type="button" (click)="AddRemove($event,movie)" class="btn btn-danger">Listeden
+          Kaldır</button>
       </div>
 
       <div>

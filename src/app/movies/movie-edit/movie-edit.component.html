@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!loading else loadingTemplate">
   <div class="col-md-9">
     <form [formGroup]="editMovieForm" (ngSubmit)="EditMovie()">
       <h4>Edit Movie</h4>
@@ -32,10 +32,15 @@
       </div>
 
       <div>
-        <button [disabled]="editMovieForm.invalid" type="submit" class="btn btn-warning">Edit</button>
+        <button [disabled]="editMovieForm.invalid" type="submit" class="btn btn-warning">Update</button>
         <button (click)="DeleteMovie()" type="button" class="btn btn-danger ms-2">Delete</button>
       </div>
     </form>
 
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <app-loading></app-loading>
+</ng-template>
+

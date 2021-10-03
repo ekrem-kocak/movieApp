@@ -5,18 +5,21 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { CategoryListComponent } from './category-list/category-list.component';
 
 
 
 @NgModule({
   declarations: [
     CategoriesComponent,
-    CategoryCreateComponent
+    CategoryCreateComponent,
+    CategoryListComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild([
+      { path: 'categories', component: CategoryListComponent, canActivate: [AuthGuard] },
       { path: 'category/create', component: CategoryCreateComponent, canActivate: [AuthGuard] },
     ])
   ],

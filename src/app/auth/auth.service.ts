@@ -48,12 +48,15 @@ export class AuthService {
   }
 
   AutoLogin() {
-    const AutoLoginedUser = JSON.parse(localStorage.getItem('user'));
+    let AutoLoginedUser = JSON.parse(localStorage.getItem('user'));
 
     if (!AutoLoginedUser) {
       this.router.navigate(["auth"]);
       return;
     }
+
+    AutoLoginedUser.expiresIn = "3600";
+    localStorage.setItem('user',JSON.stringify(AutoLoginedUser));
 
     this.user.next(AutoLoginedUser);
   }

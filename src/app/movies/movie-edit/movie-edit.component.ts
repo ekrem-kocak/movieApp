@@ -16,6 +16,7 @@ export class MovieEditComponent implements OnInit {
 
   editingMovie: Movie;
   categories: Category[];
+  loading: boolean = false;
 
   movieImage: string;
 
@@ -39,6 +40,7 @@ export class MovieEditComponent implements OnInit {
     })
 
     this.activatedRoute.params.subscribe(params => {
+      this.loading = true;
       if (params.id) {
         this.movieService.GetMovieById(params.id).subscribe(movie => {
           console.log(movie);
@@ -54,21 +56,26 @@ export class MovieEditComponent implements OnInit {
           this.movieImage = movie.imageUrl;
         })
       }
+      this.loading = false;
     })
   }
 
   EditMovie() {
-    const editedMovie: Movie = {
-      id: this.editingMovie.id,
-      name: this.editMovieForm.value.name,
-      description: this.editMovieForm.value.description,
-      imageUrl: this.editMovieForm.value.imageUrl,
-      categoryId: this.editMovieForm.value.categoryId
-    }
-    this.movieService.EditMovie(editedMovie).subscribe(() => {
-      console.log(editedMovie.id);
-      this.router.navigate([`movies/${editedMovie.id}`])
+    this.categoryService.GetCategoryNameById(this.editMovieForm.value.categoryId).subscribe(ctgName => {
+      const editedMovie: Movie = {
+        id: this.editingMovie.id,
+        name: this.editMovieForm.value.name,
+        description: this.editMovieForm.value.description,
+        imageUrl: this.editMovieForm.value.imageUrl,
+        categoryId: this.editMovieForm.value.categoryId,
+        categoryName: ctgName
+      }
+      this.movieService.EditMovie(editedMovie).subscribe(() => {
+        console.log(editedMovie.id);
+        this.router.navigate([`movies/${editedMovie.id}`])
+      })
     })
+
   }
 
   DeleteMovie() {

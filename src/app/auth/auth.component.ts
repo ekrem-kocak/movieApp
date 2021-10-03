@@ -12,6 +12,7 @@ import { StudentEmailValidator } from './email.validators';
 export class AuthComponent implements OnInit {
 
   LoginRegisterState: boolean = true; // true = login
+  errorMessage: String[] = [];
 
   constructor(
     private authService: AuthService,
@@ -23,7 +24,7 @@ export class AuthComponent implements OnInit {
 
   authForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required, StudentEmailValidator]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required,Validators.minLength(5),Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/)])
   })
 
   Auth() {
@@ -31,13 +32,13 @@ export class AuthComponent implements OnInit {
       this.authService.Login(this.authForm.value.email, this.authForm.value.password).subscribe(user => [
         localStorage.setItem('user', JSON.stringify(user)),
         this.router.navigate([""])
-      ], err => console.log(err))
+      ], err => this.errorMessage = err)
 
     } else {
       this.authService.Register(this.authForm.value.email, this.authForm.value.password).subscribe(user => {
         localStorage.setItem('user', JSON.stringify(user)),
         this.router.navigate([""]);
-      }, err => console.log(err))
+      }, err => this.errorMessage = err)
     }
   }
 }

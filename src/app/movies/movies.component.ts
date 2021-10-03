@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from '../categories/category.model';
+import { CategoryService } from '../categories/category.service';
 import { Movie } from './movie.model';
 import { MovieService } from './movie.service';
 
@@ -11,14 +13,20 @@ import { MovieService } from './movie.service';
 export class MoviesComponent implements OnInit {
 
   movies: Movie[] = [];
-  loading: boolean = false;;
+  loading: boolean = false;
 
   myList: string[] = [];
+  categories: Category[];
 
   constructor(
     private movieService: MovieService,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private categoryService: CategoryService
+  ) {
+    this.categoryService.GetCategories().subscribe(ctgs => {
+      this.categories = ctgs;
+    })
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {

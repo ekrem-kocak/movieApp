@@ -26,6 +26,7 @@ export class MovieCreateComponent implements OnInit {
     this.categoryService.GetCategories().subscribe(ctgs => {
       this.categories = ctgs;
     })
+
   }
 
   createMovieForm = new FormGroup({
@@ -36,14 +37,18 @@ export class MovieCreateComponent implements OnInit {
   })
 
   CreateMovie() {
-    this.movieService.CreateMovie({
-      name: this.createMovieForm.value.name,
-      description: this.createMovieForm.value.description,
-      imageUrl: this.createMovieForm.value.imageUrl,
-      categoryId: this.createMovieForm.value.categoryId
-    }).subscribe(() => {
-      this.router.navigate(["movies"]);
+    this.categoryService.GetCategoryNameById(this.createMovieForm.value.categoryId).subscribe(ctgName => {
+      this.movieService.CreateMovie({
+        name: this.createMovieForm.value.name,
+        description: this.createMovieForm.value.description,
+        imageUrl: this.createMovieForm.value.imageUrl,
+        categoryId: this.createMovieForm.value.categoryId,
+        categoryName: ctgName,
+      }).subscribe(() => {
+        this.router.navigate(["movies"]);
+      })
     })
+
   }
 
 

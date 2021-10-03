@@ -10,19 +10,31 @@ import { CategoryService } from '../category.service';
 })
 export class CategoryCreateComponent implements OnInit {
 
+  currentCategoriesNames: string[] = [];
+  errorMessage: string;
 
   constructor(
     private categoryService: CategoryService,
     private router: Router
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.categoryService.GetCategories().subscribe(ctgs => {
+      ctgs.forEach(ctg => {
+        this.currentCategoriesNames.push(ctg.name.toLowerCase());
+      });
+    })
+  }
 
   categoryCreateForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)])
   })
 
   CreateCategory() {
+    if (this.currentCategoriesNames.includes(this.categoryCreateForm.value.name.toLowerCase())) {
+      this.errorMessage = "Bu kategori daha önce eklenmiş";
+      return;
+    }
     this.categoryService.CreateCategory({
       id: '0',
       name: this.categoryCreateForm.value.name

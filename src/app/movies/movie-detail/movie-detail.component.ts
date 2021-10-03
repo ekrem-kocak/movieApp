@@ -10,7 +10,7 @@ import { MovieService } from '../movie.service';
 })
 export class MovieDetailComponent implements OnInit {
 
-  selectedMovie: Movie = { name: '', description: '', imageUrl: '', categoryId: '' };
+  selectedMovie: Movie = { name: '', description: '', imageUrl: '', categoryId: '', categoryName: '' };
   myList: string[] = [];
 
   constructor(

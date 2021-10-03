@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { exhaustMap, map, take, tap } from 'rxjs/operators';
 import { Category } from './category.model';
 
 @Injectable({
@@ -26,6 +26,29 @@ export class CategoryService {
         }
 
         return categories;
+      })
+    )
+  }
+
+  EditCategory(ctg: Category): Observable<Category> {
+
+    return this.http.put<Category>(this.url + 'categories/' + ctg.id + '.json', ctg);
+  }
+
+  DeleteCategory(ctg: Category): Observable<Category> {
+    return this.http.delete<Category>(this.url + 'categories/' + ctg.id + '.json');
+  }
+
+  GetCategoryNameById(ctgId: string): Observable<any> {
+    return this.GetCategories().pipe(
+      map(ctgs=>{
+        let ctgName;
+        ctgs.forEach(ctg=>{
+          if(ctg.id == ctgId){
+            ctgName = ctg.name;
+          }
+        })
+        return ctgName;
       })
     )
   }
