@@ -10,7 +10,7 @@ import { MovieService } from './movie.service';
 })
 export class MoviesComponent implements OnInit {
 
-  movies: Movie[];
+  movies: Movie[] = [];
   loading: boolean = false;;
 
   myList: string[] = [];

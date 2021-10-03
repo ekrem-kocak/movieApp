@@ -8,22 +8,25 @@
           <label class="form-label">Movie Name</label>
           <input type="text" class="form-control" formControlName="name">
         </div>
+
         <div class="mb-3">
           <label class="form-label">Description</label>
           <textarea type="text" class="form-control" rows="5" formControlName="description"></textarea>
         </div>
+
         <div class="my-3">
           <label class="form-label">Image Url</label>
-          <div *ngIf="createMovieForm.get('imageUrl').dirty && createMovieForm.get('imageUrl').valid" class="my-2">
-            <img src="../../../assets/img/{{movieImage}}" class="img-fluid rounded" style="max-height: 250px;">
-          </div>
           <input [(ngModel)]="movieImage" type="text" class="form-control" formControlName="imageUrl" placeholder="*">
-          <ul *ngIf="createMovieForm.get('imageUrl').invalid" class="alert alert-danger ps-4 py-1">
+          <ul *ngIf="createMovieForm.get('imageUrl').invalid && createMovieForm.get('imageUrl').dirty" class="alert alert-danger ps-4 py-1">
             <li class="text-danger">
               uzantı '.jpg' olmak zorundadır.
             </li>
           </ul>
+          <div *ngIf="createMovieForm.get('imageUrl').dirty && createMovieForm.get('imageUrl').valid" class="my-2">
+            <img src="../../../assets/img/{{movieImage}}" class="img-fluid rounded" style="max-height: 250px;">
+          </div>
         </div>
+
         <div class="my-3">
           <label class="form-label">Category</label>
           <select class="form-select" formControlName="categoryId">

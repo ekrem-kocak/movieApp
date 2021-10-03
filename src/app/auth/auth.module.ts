@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forChild([
-      { path: 'auth', component: AuthComponent}
+      { path: '', component: AuthComponent}
     ])
   ],
   exports: [

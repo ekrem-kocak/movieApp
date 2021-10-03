@@ -31,11 +31,11 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild([
-      { path: 'movies/mylist', component: MyListComponent, canActivate: [AuthGuard] },
-      { path: 'movies/create', component: MovieCreateComponent, canActivate: [AuthGuard] },
       {
-        path: 'movies', component: MoviesHomeComponent, canActivate: [AuthGuard], children: [
+        path: '', component: MoviesHomeComponent, canActivate: [AuthGuard], children: [
           { path: '', component: MoviesComponent },
+          { path: 'mylist', component: MyListComponent },
+          { path: 'create', component: MovieCreateComponent },
           { path: ':id', component: MovieDetailComponent },
           { path: 'category/:id', component: MoviesComponent },
           { path: 'search/:text', component: MoviesComponent },
