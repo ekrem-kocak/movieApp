@@ -2,7 +2,7 @@
 
 Bu uygulamayı Angular bilgilerimi pekiştirmek için yaptim.
 
-Uygulamayı yayınladığım adrese gidip uygulamayı deneyebilirsiniz. => https://movieapp-b1366.web.app/
+Uygulamayı yayınladığım adrese gidip uygulamayı deneyebilirsiniz. => https://movieapp-234fe.web.app
 
 ## Projeyi Çalıştırma
 
@@ -22,7 +22,7 @@ Tum sorulariniz icin bana [buradan](https://www.linkedin.com/in/ekrem-ko%C3%A7ak
 
 I made this app to test my Angular knowledge.
 
-The address where I published the app => https://movieapp-b1366.web.app/
+The address where I published the app => https://movieapp-234fe.web.app
 
 ## Running the Project
 
