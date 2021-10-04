@@ -12,6 +12,7 @@ export class CategoryListComponent implements OnInit {
 
   categories: Category[] = [];
   editState: boolean = false;
+  deleteState: boolean = false;
   selectedCategory: Category;
 
   constructor(
@@ -37,10 +38,15 @@ export class CategoryListComponent implements OnInit {
     })
   }
 
-  DeleteCategory(ctg:Category){
-    this.categoryService.DeleteCategory(ctg).subscribe(()=>{
-      window.location.reload();
-    })
+  DeleteCategory() {
+    if (this.selectedCategory && this.deleteState) {
+      this.categoryService.DeleteCategory(this.selectedCategory);
+    }
+  }
+
+  selectDeleteCategory(category: Category) {
+    this.deleteState = true;
+    this.selectedCategory = category;
   }
 
   selectEditingCategoryName(category: Category) {

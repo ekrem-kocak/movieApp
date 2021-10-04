@@ -18,3 +18,19 @@
   border-radius: 5px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
+
+@media only screen and (max-width: 992px) {
+  .edit-box{
+    width: 70%;
+    left: 15%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .edit-box{
+    width: 90%;
+    left: 5%;
+  }
+}
+
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { Movie } from '../movie.model';
 import { MovieService } from '../movie.service';
 
@@ -29,7 +30,7 @@ export class MyListComponent implements OnInit {
           }
           this.loading = false;
         })
-      }else{
+      } else {
         this.loading = false;
       }
     })
@@ -37,7 +38,7 @@ export class MyListComponent implements OnInit {
 
   RemoveFromList(movie: Movie) {
     this.movieService.RemoveFromList(movie).subscribe(() => {
-      window.location.reload();
+      this.myListMovies.splice(this.myListMovies.indexOf(movie), 1);
     });
   }
 

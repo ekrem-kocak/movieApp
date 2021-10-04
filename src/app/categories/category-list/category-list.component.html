@@ -10,7 +10,7 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col"> te</th>
           </tr>
         </thead>
         <tbody>
@@ -18,12 +18,12 @@
             <th scope="row"> {{i+1}} </th>
             <td class="text-capitalize"> {{ctg.name}} </td>
             <td>
-              <a (click)="selectEditingCategoryName(ctg)" class="btn btn-warning">
+              <a (click)="selectEditingCategoryName(ctg)" class="btn btn-warning p-2">
                 <i class="fas fa-edit" style="font-weight: normal !important;"></i>
               </a>
             </td>
             <td>
-              <a (click)="DeleteCategory(ctg)" class="btn btn-danger">
+              <a (click)="selectDeleteCategory(ctg)" class="btn btn-danger p-2">
                 <i class="fas fa-trash-alt" style="font-weight: normal !important;"></i>
               </a>
             </td>
@@ -39,6 +39,10 @@
   <ng-template [ngTemplateOutlet]="editBox"></ng-template>
 </div>
 
+<div *ngIf="deleteState">
+  <ng-template [ngTemplateOutlet]="deleteBox"></ng-template>
+</div>
+
 <ng-template #editBox>
   <div class="backdrop"></div>
 
@@ -50,9 +54,20 @@
         <label class="form-label">Category Name</label>
         <input type="text" class="form-control" formControlName="name">
       </div>
-      <button (click)="EditCategory()" [disabled]="categoryEditForm.invalid" type="button" class="btn btn-warning">Update</button>
+      <button (click)="EditCategory()" [disabled]="categoryEditForm.invalid" type="button"
+        class="btn btn-warning">Update</button>
       <button (click)="editState=false;" type="button" class="btn btn-danger ms-2">Close</button>
     </form>
   </div>
 
+</ng-template>
+
+<ng-template #deleteBox>
+  <div class="backdrop"></div>
+
+  <div class="edit-box">
+    <h4 class="mb-4">Kategoriyi silmek istediğinize emin misiniz?</h4>
+    <button (click)="DeleteCategory()" class="btn btn-danger">Delete</button>
+    <button (click)="deleteState=false;" type="button" class="btn btn-primary ms-2">Close</button>
+  </div>
 </ng-template>

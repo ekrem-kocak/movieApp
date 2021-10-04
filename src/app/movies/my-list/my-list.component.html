@@ -2,7 +2,7 @@
 <hr>
 <div class="container" *ngIf="!loading else loadingTemplate">
   <div class="row" *ngIf="myListMovies.length>0 else noMvies">
-    <div class="col-md-6" *ngFor="let movie of myListMovies">
+    <div class="col-lg-4 col-sm-6" *ngFor="let movie of myListMovies">
       <div class="card mb-3">
         <img src="../../../assets/img/{{movie.imageUrl}}" class="card-img-top"
           style="max-height: 200px; object-fit: contain;">

@@ -34,8 +34,6 @@ import { SharedModule } from '../shared/shared.module';
       {
         path: '', component: MoviesHomeComponent, canActivate: [AuthGuard], children: [
           { path: '', component: MoviesComponent },
-          { path: 'mylist', component: MyListComponent },
-          { path: 'create', component: MovieCreateComponent },
           { path: ':id', component: MovieDetailComponent },
           { path: 'category/:id', component: MoviesComponent },
           { path: 'search/:text', component: MoviesComponent },
